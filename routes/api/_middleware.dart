@@ -1,7 +1,7 @@
 import 'package:dart_frog/dart_frog.dart';
-import 'package:myapp/auth/authenticator.dart';
-import 'package:myapp/auth/bearer_auth.dart';
-import 'package:myapp/auth/user.dart';
+import 'package:tiangou/auth/authenticator.dart';
+import 'package:tiangou/auth/bearer_auth.dart';
+import 'package:tiangou/auth/user.dart';
 
 Handler middleware(Handler handler) {
   return handler.use(
@@ -13,5 +13,4 @@ Handler middleware(Handler handler) {
     ),
   );
   // return handler;
-
 }
