@@ -14,6 +14,6 @@ Future<HttpServer> run(Handler handler, InternetAddress ip, int port) {
   // Or use the Dart Frog serve method to do that for you.
 
   // port = 81;
-  ip = InternetAddress.loopbackIPv4;
+  ip = InternetAddress.anyIPv4;
   return serve(handler, ip, port);
 }
