@@ -11,6 +11,8 @@ dependencies:
   dart_jsonwebtoken: ^2.14.0
   crypto: ^3.0.3
   http: ^1.2.1
+  path: ^1.9.0
+  taggy: ^0.1.2+3
 
 dev_dependencies:
   mocktail: ^1.0.0

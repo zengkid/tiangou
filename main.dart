@@ -1,11 +1,12 @@
 import 'dart:io';
-
+import 'package:taggy/taggy.dart';
 import 'package:dart_frog/dart_frog.dart';
+import 'package:tiangou/music/service.dart';
 
-// Future<void> init(InternetAddress ip, int port) async {
-//   // Any code initialized within this method will only run on server start, any hot reloads
-//   // afterwards will not trigger this method until a hot restart.
-// }
+Future<void> init(InternetAddress ip, int port) async {
+  print("init....");
+  Taggy.initializeFrom(getTaggyDylibFromDirectory('.'));
+}
 
 Future<HttpServer> run(Handler handler, InternetAddress ip, int port) {
   // 1. Execute any custom code prior to starting the server...
@@ -15,5 +16,13 @@ Future<HttpServer> run(Handler handler, InternetAddress ip, int port) {
 
   // port = 81;
   ip = InternetAddress.anyIPv4;
-  return serve(handler, ip, port);
+
+  print("run....");
+
+  // var newH =
+  //     handler.use(provider<MusicService>((context) => MusicService()));
+
+  final server = serve(handler, ip, port);
+
+  return server;
 }
