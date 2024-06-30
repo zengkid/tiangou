@@ -8,11 +8,13 @@ class MusicService {
   bool inprogress = false;
 
   Future<void> scanMusic() async {
+    print('starting scan');
     inprogress = true;
     var scanPath = r'Y:\Music\梁静茹[1999-2021]录音室专辑合集';
     var scanDir = Directory(scanPath);
 
     await scanMusics(scanDir);
+    print("finished scan");
     inprogress = false;
   }
 
@@ -39,7 +41,7 @@ class MusicService {
       var album = taggyFile.tags.first.album ?? "";
       var lyrics = taggyFile.tags.first.lyrics ?? "";
 
-      print('$artist ($album)- $title');
+      // print('$artist ($album)- $title');
     } catch (e) {
       print(e);
     }

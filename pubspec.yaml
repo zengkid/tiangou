@@ -12,6 +12,7 @@ dependencies:
   crypto: ^3.0.3
   http: ^1.2.1
   taggy: ^0.1.2+3
+  isar: ^3.1.0+1
 
 dev_dependencies:
   mocktail: ^1.0.0
