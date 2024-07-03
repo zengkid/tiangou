@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:crypto/crypto.dart';
+import 'package:tiangou/auth/repository.dart';
 
 import 'user.dart';
 
@@ -16,38 +17,18 @@ String generateSeurityKey() {
 }
 
 class Authenticator {
-  static const _users = {
-    'john': User(
-      id: '1',
-      username: 'John',
-      name: 'John',
-      password: '123',
-    ),
-    'jack': User(
-      id: '2',
-      username: 'Jack',
-      name: 'Jack',
-      password: '321',
-    ),
-  };
+  UserRepository userRepository;
 
-  static const _passwords = {
-    // ⚠️ Never store user's password in plain text, these values are in plain text
-    // just for the sake of the tutorial.
-    'john': '123',
-    'jack': '321',
-  };
+  Authenticator(this.userRepository);
 
-  User? findByUsernameAndPassword({
+  Future<User?> findByUsernameAndPassword({
     required String username,
     required String password,
-  }) {
-    final user = _users[username];
-
-    if (user != null && _passwords[username] == password) {
+  }) async {
+    var user = await userRepository.findByUsername(username);
+    if (user?.password == password) {
       return user;
     }
-
     return null;
   }
 
@@ -61,8 +42,10 @@ class Authenticator {
       final payloadData = payload.payload as Map<String, dynamic>;
 
       final username = payloadData['username'] as String;
-      return _users[username];
+      final user = await userRepository.findByUsername(username);
+      return user;
     } catch (e) {
+      print(e);
       return null;
     }
   }
@@ -74,10 +57,10 @@ class Authenticator {
     final jwt = JWT(
       {
         'id': user.id,
-        'name': user.name,
         'username': username,
       },
     );
-    return jwt.sign(SecretKey(SECURITY_KEY), expiresIn: const Duration(days: 30));
+    return jwt.sign(SecretKey(SECURITY_KEY),
+        expiresIn: const Duration(days: 30));
   }
 }

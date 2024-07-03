@@ -24,7 +24,7 @@ Future<Response> _onPost(RequestContext context) async {
 
   final authenticator = context.read<Authenticator>();
 
-  final user = authenticator.findByUsernameAndPassword(
+  final user = await authenticator.findByUsernameAndPassword(
     username: username,
     password: password,
   );

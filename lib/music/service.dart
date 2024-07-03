@@ -4,7 +4,6 @@ import 'package:path/path.dart';
 import 'package:taggy/taggy.dart';
 
 class MusicService {
-
   bool inprogress = false;
 
   Future<void> scanMusic() async {
