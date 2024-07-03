@@ -10,12 +10,12 @@ Future<void> init(InternetAddress ip, int port) async {
   print("init....");
   Taggy.initializeFrom(getTaggyDylibFromDirectory('.'));
 
-  // final userRepository = UserRepository();
-  // var adminUser = await userRepository.findByUsername("admin");
-  // if (adminUser == null) {
-  //   adminUser = await userRepository.create(User("admin", "admin"));
-  //   print("adminUser: ${adminUser.username}");
-  // }
+  final userRepository = UserRepository();
+  var adminUser = await userRepository.findByUsername("admin");
+  if (adminUser == null) {
+    adminUser = await userRepository.create(User("admin", "admin"));
+    print("adminUser: ${adminUser.username}");
+  }
   // Isar.cl
 }
 

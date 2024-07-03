@@ -15,5 +15,5 @@ Response onRequest(RequestContext context) {
   return Response(
       encoding: utf8,
       headers: {HttpHeaders.contentTypeHeader: 'text/json;charset=utf-8'},
-      body: 'scanning:$scanning');
+      body: '{"scanning":"$scanning"}');
 }

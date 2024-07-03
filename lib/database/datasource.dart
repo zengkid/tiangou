@@ -4,14 +4,17 @@ import 'package:isar/isar.dart';
 
 import '../auth/user.dart';
 
+const dbname = "tiangou";
+
 Future<Isar> openIsar() async {
   var workPath =
       (Platform.environment['HOME'] ?? Platform.environment['USERPROFILE']) ??
           File(Platform.script.toFilePath()).parent.path;
-  var isar = Isar.getInstance();
+  var isar = Isar.getInstance(dbname);
   if (isar == null || !isar.isOpen) {
     isar = await Isar.open(
       [UserSchema],
+      name: dbname,
       directory: workPath,
     );
   }
@@ -26,6 +29,7 @@ Isar openIsarSync() {
   if (isar == null || !isar.isOpen) {
     isar = Isar.openSync(
       [UserSchema],
+      name: dbname,
       directory: workPath,
     );
   }
